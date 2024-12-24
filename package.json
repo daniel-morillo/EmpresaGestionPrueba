@@ -1,0 +1,29 @@
+{
+  "name": "empresagestion",
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "apps/*"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:api\" \"npm run start:client\"",
+    "start:client": "npm --workspace apps/client start",
+    "start:api": "npm --workspace apps/api start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tanstack/react-query": "^5.62.9",
+    "@types/express": "^5.0.0",
+    "@types/react": "^19.0.2",
+    "express": "^4.21.2",
+    "react": "^19.0.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^19.0.2",
+    "concurrently": "^9.1.0"
+  }
+}

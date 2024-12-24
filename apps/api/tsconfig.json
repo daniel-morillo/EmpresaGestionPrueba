@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["src/*"]
+    },
+    "outDir": "dist",
+    "declaration": true,
+    "esModuleInterop": true,
+    "module": "commonjs",            
+    "forceConsistentCasingInFileNames": true,        
+
+    /* Type Checking */
+    "strict": true,                                                        
+    "skipLibCheck": true
+  }
+}
