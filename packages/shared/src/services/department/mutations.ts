@@ -37,3 +37,49 @@ export function useUpdateDepartment(){
         }
     })
 }
+
+// Añadir empleado a un departamento
+export async function addEmployeeToDepartment({
+    _id,
+    employeeId,
+  }: {
+    _id: string;
+    employeeId: string;
+  }) {
+    await api.put(`/departments/${_id}/add-employee/${employeeId}`, {});
+  }
+  
+  export function useAddEmployeeToDepartment() {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationKey: ["addEmployeeToDepartment"],
+      mutationFn: addEmployeeToDepartment,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["getDepartments"] });
+      },
+    });
+  }
+  
+  // Eliminar empleado de un departamento
+  export async function removeEmployeeFromDepartment({
+    _id,
+    employeeId,
+  }: {
+    _id: string;
+    employeeId: string;
+  }) {
+    await api.put(`/departments/${_id}/remove-employee/${employeeId}`, {});
+  }
+  
+  export function useRemoveEmployeeFromDepartment() {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationKey: ["removeEmployeeFromDepartment"],
+      mutationFn: removeEmployeeFromDepartment,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["getDepartments"] });
+      },
+    });
+  }
+  
+  

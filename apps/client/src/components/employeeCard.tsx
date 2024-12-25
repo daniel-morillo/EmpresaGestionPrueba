@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface EmployeeCardProps {
     name: string;
     email: string;
-    departments?: string[];
+    departments?: any[];
     onView?: () => void;
     onEdit?: () => void;
 }
@@ -14,7 +15,7 @@ export function EmployeeCard({
     onEdit,
 }: EmployeeCardProps) {
     return (
-        <div className="max-w-sm mx-auto bg-base-100 shadow-lg rounded-lg overflow-hidden border border-gray-200">
+        <div className="max-w-sm mx-auto bg-base-100 shadow-lg rounded-lg overflow-hidden border border-gray-200 m-5">
             {/* Avatar Only Cause I don't have one image per employee*/}
             <div className="flex justify-center p-4">
                 <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
@@ -51,10 +52,10 @@ export function EmployeeCard({
 
             {/* Actions */}
             <div className="flex justify-around p-4 border-t border-gray-200">
-                <button className="btn btn-primary btn-sm" onClick={onView}>
+                <button className="btn btn-primary btn-sm mx-1" onClick={onView}>
                     View Employee
                 </button>
-                <button className="btn btn-secondary btn-sm" onClick={onEdit}>
+                <button className="btn btn-secondary btn-sm mx-1" onClick={onEdit}>
                     Edit Employee
                 </button>
             </div>

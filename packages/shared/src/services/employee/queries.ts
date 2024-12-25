@@ -2,9 +2,13 @@ import { IEmployee, TGetEmployeeParamsDefinition} from "../../models";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
 
+//This is to handle typescript populated types in client side
+type PopulatedDepartment = { _id: string; name: string; description: string };
+type PopulatedEmployee = Omit<IEmployee, 'departments'> & { departments: PopulatedDepartment[] };
+
 export async function getEmployees(){
     const response = await api.get("/employees");
-    const employees = (await response) as IEmployee[];
+    const employees = (await response) as PopulatedEmployee[];
     return employees;
 }
 
@@ -14,7 +18,7 @@ export function useEmployees(){
 
 export async function getEmployee(_id: TGetEmployeeParamsDefinition['_id']){
     const response = await api.get(`/employees/${_id}`);
-    const employee = (await response) as IEmployee;
+    const employee = (await response) as PopulatedEmployee;
     return employee;
 }
 

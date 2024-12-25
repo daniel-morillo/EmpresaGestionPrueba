@@ -1,7 +1,13 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import { IEmployee } from "./dto";
 
 export const employeeEschema =  new Schema<IEmployee>({
     name: {type: String, required: true},
     email: {type: String, required: true},
+    departments: {
+        type: [Schema.Types.ObjectId], 
+        ref: "Department",
+    }
 });
+
+export const Employee = model<IEmployee>("Employee", employeeEschema);

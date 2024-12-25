@@ -12,12 +12,12 @@ const Department = model("department",departmentSchema)
 const Employee = model("employee",employeeEschema)
 
 async function getDepartments(filter: TGetDepartmentQueryDefinition = {}) {
-    const departments = await Department.find(filter);
+    const departments = await Department.find(filter).populate("employees");
     return departments;
 }
 
 async function getDepartment(_id: TGetDepartmentParamsDefinition["_id"]) {
-    const department = await Department.findById(_id);
+    const department = await Department.findById(_id).populate("employees");
     return department;
 }
 

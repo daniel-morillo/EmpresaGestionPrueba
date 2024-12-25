@@ -3,6 +3,7 @@ import { IEmployee,
     TGetEmployeeQueryDefinition,
     TGetEmployeeParamsDefinition,
     employeeEschema,
+    departmentSchema,
     TCreateEmployeeInputDefinition,
     TUpdateEmployeeQueryDefinition,
     TUpdateEmployeeInputDefinition,
@@ -10,13 +11,14 @@ import { IEmployee,
 
 const Employee = model("Employee", employeeEschema);
 
+
 async function getEmployees(filter: TGetEmployeeQueryDefinition = {}) {
-    const employees = await Employee.find(filter);
+    const employees = await Employee.find(filter).populate("departments");
     return employees;
 }
 
 async function getEmployee(_id: TGetEmployeeParamsDefinition["_id"]) {
-    const employee = await Employee.findById(_id);
+    const employee = await Employee.findById(_id).populate("departments");
     return employee;
 }
 

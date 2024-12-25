@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { IJerarchy } from "./dto";
 
 export const jerarchySchema = new Schema<IJerarchy>({
@@ -18,3 +18,5 @@ export const jerarchySchema = new Schema<IJerarchy>({
         required: true,
     },
 });
+
+export const Jerarchy = model<IJerarchy>("Jerarchy", jerarchySchema);
