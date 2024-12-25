@@ -26,7 +26,7 @@ async function createEmployee(input: TCreateEmployeeInputDefinition) {
 }
 
 async function updateEmployee(_id: TUpdateEmployeeQueryDefinition["_id"], input: TUpdateEmployeeInputDefinition) {
-    const employee = await Employee.findByIdAndUpdate(_id, input);
+    const employee = await Employee.findByIdAndUpdate(_id, input, {new: true});	
     return employee;
 }
 

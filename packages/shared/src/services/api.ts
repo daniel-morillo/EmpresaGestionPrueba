@@ -1,36 +1,29 @@
-type ApiRequestInit = Omit<RequestInit, "body"> & { body?: any };
+const API_BASE_URL = "http://localhost:5000/api";
 
-async function fetchApi(input: string | URL, init?: ApiRequestInit) {
-  const url = typeof input === "string" ? new URL(input, "http://localhost:5000") : input;
-  const headers: HeadersInit = {
-    "Content-Type": "application/json", // This make sure the server knows it's JSON
-  };
-
-  const res = await fetch(url.href, {
-    ...init,
-    headers,
-    body: init?.body ? JSON.stringify(init.body) : undefined,
+async function request(endpoint: string, options: RequestInit = {}) {
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+    },
   });
 
-  if (!res.ok) {
-    
-    throw new Error(`Error: ${res.status} ${res.statusText}`);
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Error en la solicitud");
   }
 
-  return res.json();
+  return response.json();
 }
 
 export const api = {
-  async get(input: string | URL, init?: ApiRequestInit) {
-    return fetchApi(input, { ...init, method: "GET" });
-  },
-  async post(input: string | URL, init?: ApiRequestInit) {
-    return fetchApi(input, { ...init, method: "POST" });
-  },
-  async put(input: string | URL, init?: ApiRequestInit) {
-    return fetchApi(input, { ...init, method: "PUT" });
-  },
-  async delete(input: string | URL, init?: ApiRequestInit) {
-    return fetchApi(input, { ...init, method: "DELETE" });
-  },
+  get: (endpoint: string) => request(endpoint),
+  post: (endpoint: string, body: any) =>
+    request(endpoint, { method: "POST", body: JSON.stringify(body) }),
+  put: (endpoint: string, body: any) =>
+    request(endpoint, { method: "PUT", body: JSON.stringify(body) }),
+  delete: (endpoint: string) => request(endpoint, { method: "DELETE" }),
 };
+
+export default api;
