@@ -15,7 +15,7 @@ export function EmployeeCard({
     onEdit,
 }: EmployeeCardProps) {
     return (
-        <div className="max-w-sm mx-auto bg-base-100 shadow-lg rounded-lg overflow-hidden border border-gray-200 m-5">
+        <div className="max-w-sm mx-auto bg-slate-800 shadow-lg rounded-lg overflow-hidden border border-gray-200 m-5">
             {/* Avatar Only Cause I don't have one image per employee*/}
             <div className="flex justify-center p-4">
                 <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
@@ -25,7 +25,7 @@ export function EmployeeCard({
                         viewBox="0 0 24 24"
                         strokeWidth={2}
                         stroke="currentColor"
-                        className="w-16 h-16 text-gray-400">
+                        className="w-16 h-16 text-white">
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -36,13 +36,13 @@ export function EmployeeCard({
 
             {/* Employee Info */}
             <div className="p-4 text-center">
-                <h2 className="text-xl font-bold">{name}</h2>
-                <p className="text-gray-600">{email}</p>
+                <h2 className="text-xl text-white font-bold">{name}</h2>
+                <p className="text-white">{email}</p>
                 <div className="mt-2">
-                    <p className="text-sm text-gray-500 font-semibold">Departments:</p>
+                    <p className="text-sm text-gray-200 font-semibold">Departments:</p>
                     <ul className="list-disc list-inside">
                         {departments?.map((department, index) => (
-                            <li key={index} className="text-gray-700 text-sm">
+                            <li key={index} className="text-gray-300 text-sm">
                                 {department}
                             </li>
                         ))}

@@ -29,7 +29,7 @@ const Employees = () => {
     <div className="container mx-auto px-4 py-6">
       {/* Encabezado y buscador */}
       <div className="flex flex-col items-center mb-8">
-      <h1 className="text-3xl font-bold text-center mb-4">Employees List</h1>
+      <h1 className="text-3xl text-white font-bold text-center mb-4">Employees List</h1>
         <div className="flex justify-between items-center gap-4">
         <input
           type="text"

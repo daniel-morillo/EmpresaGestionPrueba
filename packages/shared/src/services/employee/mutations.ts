@@ -1,5 +1,6 @@
 import { IEmployee,
     TCreateEmployeeInputDefinition,
+    TGetEmployeeParamsDefinition,
     TUpdateEmployeeInputDefinition,
     TUpdateEmployeeQueryDefinition
  } from "../../models";
@@ -38,3 +39,18 @@ export function useUpdateEmployee(){
     })
 }
 
+export async function deleteEmployee(_id: TGetEmployeeParamsDefinition['_id']){
+    const response = await api.delete(`/employees/${_id}`);
+    const employee = (await response) as IEmployee;
+    return employee;
+}
+
+export function useDeleteEmployee(){
+    const queryClient = useQueryClient();
+    return useMutation({mutationKey: ["deleteEmployee"], mutationFn: deleteEmployee, 
+        onSuccess(data) {
+            queryClient.invalidateQueries({ queryKey: ["getEmployees"] });
+            queryClient.invalidateQueries({ queryKey: ["getEmployee", data._id] });
+        }
+    })
+}

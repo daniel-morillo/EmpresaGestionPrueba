@@ -32,9 +32,17 @@ async function updateEmployee(_id: TUpdateEmployeeQueryDefinition["_id"], input:
     return employee;
 }
 
+async function deleteEmployee(_id: TGetEmployeeParamsDefinition["_id"]) {
+    const employee = await Employee.findByIdAndDelete(_id);
+    return employee;
+}
+
+
+
 export const employeeService = {
     getEmployees,
     getEmployee,
     createEmployee,
     updateEmployee,
+    deleteEmployee
 } as const

@@ -55,11 +55,25 @@ async function updateEmployee(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+async function deleteEmployee(req: Request, res: Response, next: NextFunction) {
+  try {
+    const params = getEmployeeParamsDefinition.parse(req.params);
+    const employee = await employeeService.deleteEmployee(params._id);
+    if (!employee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+    return res.status(200).json(employee);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export const employeeController = {
   getEmployees,
   getEmployee,
   createEmployee,
   updateEmployee,
+  deleteEmployee,
 } as const;
 
 

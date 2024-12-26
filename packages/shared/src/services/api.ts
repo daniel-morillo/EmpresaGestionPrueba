@@ -9,11 +9,12 @@ async function request(endpoint: string, options: RequestInit = {}) {
     },
   });
 
+
   if (!response.ok) {
     const error = await response.json();
+    console.error("Error Response Body:", error);
     throw new Error(error.message || "Error en la solicitud");
   }
-
   return response.json();
 }
 

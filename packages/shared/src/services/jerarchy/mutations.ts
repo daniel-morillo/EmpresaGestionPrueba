@@ -38,3 +38,20 @@ export function useUpdateJerarchy(){
     })
 }
 
+export async function removeJerarchy(_id: TUpdateJerarchyQueryDefinition['_id']){
+    const response = await api.delete(`/jerarchies/${_id}`);
+    const jerarchy = (await response) as IJerarchy;
+    return jerarchy;
+}
+
+export function useRemoveJerarchy(){
+    const queryClient = useQueryClient();
+    return useMutation({mutationKey: ["removeJerarchy"], mutationFn: removeJerarchy, 
+        onSuccess(data) {
+            queryClient.invalidateQueries({ queryKey: ["getJerarchies"] });
+            queryClient.invalidateQueries({ queryKey: ["getJerarchy", data._id] });
+        }
+    })
+}
+
+

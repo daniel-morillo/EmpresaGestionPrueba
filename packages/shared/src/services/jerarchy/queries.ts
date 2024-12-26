@@ -25,9 +25,11 @@ export function useJerarchy(params: TGetJerarchyParamsDefinition){
 }
 
 async function getJerarchiesByEmployee(employeeId: string) {
-    const response = await api.get(`/jerarchies?employee=${employeeId}`);
-    return response.data;
+    const response1 = await api.get(`/jerarchies/employee/${employeeId}`);
+    const response2 = await api.get(`/jerarchies/superior/${employeeId}`);
+    return response1.concat(response2);
   }
+  
   
 export function useJerarchiesByEmployee(employeeId: string) {
     return useQuery({ queryKey: ["getJerarchiesByEmployee", employeeId], queryFn: () => getJerarchiesByEmployee(employeeId) });

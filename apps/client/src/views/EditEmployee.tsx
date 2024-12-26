@@ -4,14 +4,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEmployee,
    useUpdateEmployee,
    useAddEmployeeToDepartment,
-   useRemoveEmployeeFromDepartment } from "shared/src/services";
-import { useDepartments } from "shared/src/services/department/queries";
+   useRemoveEmployeeFromDepartment, 
+   useDeleteEmployee,
+  useRemoveJerarchy,
+useDepartments,
+useJerarchiesByEmployee } from "shared/src/services";
+;
 
 const EditEmployee = () => {
   const { id } = useParams<{ id: string }>();
   const { data: employee, isLoading, error } = useEmployee({ _id: id! });
   const { mutate: updateEmployee } = useUpdateEmployee();
+  const { mutate: deleteEmployee } = useDeleteEmployee();
+  const { mutate: removeJerarchy } = useRemoveJerarchy();
   const { data: availableDepartments } = useDepartments();
+  const { data: jerarchies } = useJerarchiesByEmployee(id!);
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -41,7 +48,6 @@ const EditEmployee = () => {
   };
 
   const handleDepartmentChange = (index: number, value: string) => {
-    // Validar si el departamento ya fue seleccionado en otro índice
     if (departments.includes(value) && departments[index] !== value) {
       alert("This department is already selected!");
       return;
@@ -58,19 +64,16 @@ const EditEmployee = () => {
     setDepartments(updatedDepartments);
   };
 
-
   const handleUpdate = () => {
     if (!name || !email) {
       alert("Please fill out all fields.");
       return;
     }
   
-    // Determinar los departamentos añadidos y eliminados
     const initialDepartments = employee?.departments.map((dept: any) => dept._id.toString());
     const addedDepartments = departments.filter((dept) => !initialDepartments?.includes(dept));
     const removedDepartments = initialDepartments?.filter((dept) => !departments.includes(dept));
   
-    // Actualizar el empleado
     updateEmployee(
       {
         _id: id!,
@@ -78,7 +81,6 @@ const EditEmployee = () => {
       },
       {
         onSuccess: () => {
-          // Actualizar los departamentos
           addedDepartments.forEach((deptId) => {
             addEmployeeToDepartment({ _id: deptId, employeeId: id! });
           });
@@ -94,6 +96,25 @@ const EditEmployee = () => {
         },
       }
     );
+  };
+
+  const handleDelete = () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this employee?");
+    if (!confirmDelete) return;
+
+    jerarchies?.forEach((jerarchy: any) => {
+      removeJerarchy(jerarchy._id);
+    });
+
+    deleteEmployee(id!, {
+      onSuccess: () => {
+        alert("Employee deleted successfully!");
+        navigate("/employees");
+      },
+      onError: () => {
+        alert("Error deleting employee.");
+      },
+    });
   };
 
   if (isLoading) {
@@ -162,13 +183,16 @@ const EditEmployee = () => {
             Add Department
           </button>
         </div>
-        <div className="flex justify-end gap-4 mt-6">
+        <div className="flex justify-center gap-4 mt-6">
           <button
             type="button"
             className="btn btn-secondary"
             onClick={() => navigate("/employees")}
           >
             Cancel
+          </button>
+          <button type="button" className="btn btn-error" onClick={handleDelete}>
+            Delete Employee
           </button>
           <button type="button" className="btn btn-primary" onClick={handleUpdate}>
             Save Changes
@@ -180,3 +204,4 @@ const EditEmployee = () => {
 };
 
 export default EditEmployee;
+

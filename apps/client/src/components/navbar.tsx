@@ -1,28 +1,32 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-
-const handleClick = (label: string) => {
-    alert(`Clicked: ${label}`);
-};
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const handleNavigation = (path: string) => {
+        navigate(path);
+        setIsMenuOpen(false); // Cierra el menú en dispositivos móviles
+    };
 
     return (
         <div className="navbar bg-base-100 items-center justify-between px-4 md:px-8">
             <div className="text-2xl font-bold">
-                <a className="btn btn-ghost normal-case text-xl">RRHH MANAGMENT</a>
+                <a onClick={() => handleNavigation('/')} className="btn btn-ghost normal-case text-xl">
+                    RRHH MANAGEMENT
+                </a>
             </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-4">
-                <a onClick={() => handleClick('Home')} className="btn btn-ghost text-lg">
+                <a onClick={() => handleNavigation('/')} className="btn btn-ghost text-lg">
                     Home
                 </a>
-                <a onClick={() => handleClick('Departments')} className="btn btn-ghost text-lg">
+                <a onClick={() => handleNavigation('/departments')} className="btn btn-ghost text-lg">
                     Departments
                 </a>
-                <a onClick={() => handleClick('Employees')} className="btn btn-ghost text-lg">
+                <a onClick={() => handleNavigation('/employees')} className="btn btn-ghost text-lg">
                     Employees
                 </a>
             </div>
@@ -50,13 +54,13 @@ export function Header() {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className="absolute top-16 left-0 w-full bg-base-100 shadow-lg">
-                    <a onClick={() => handleClick('Home')} className="block px-4 py-2 text-lg hover:bg-base-200">
+                    <a onClick={() => handleNavigation('/')} className="block px-4 py-2 text-lg hover:bg-base-200">
                         Home
                     </a>
-                    <a onClick={() => handleClick('Departments')} className="block px-4 py-2 text-lg hover:bg-base-200">
+                    <a onClick={() => handleNavigation('/departments')} className="block px-4 py-2 text-lg hover:bg-base-200">
                         Departments
                     </a>
-                    <a onClick={() => handleClick('Employees')} className="block px-4 py-2 text-lg hover:bg-base-200">
+                    <a onClick={() => handleNavigation('/employees')} className="block px-4 py-2 text-lg hover:bg-base-200">
                         Employees
                     </a>
                 </div>
