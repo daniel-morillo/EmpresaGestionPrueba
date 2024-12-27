@@ -35,6 +35,12 @@ async function removeJerarchy(_id: TGetJerarchyParamsDefinition["_id"]) {
     return jerarchy;
 }
 
+async function removeJerarchyByEmployeeAndDepartment(EmployeeId: string, DepartmentId: string) {
+    const jerarchies1 = await Jerarchy.deleteMany({ employee: EmployeeId, department: DepartmentId});
+    const jerarchies2 = await Jerarchy.deleteMany({ superior: EmployeeId, department: DepartmentId});
+    return { deletedFromEmployee: jerarchies1, deletedFromSuperior: jerarchies2 };
+}
+
 async function getJerarchiesByEmployee(employeeId: string) {
     const jerarchies = await Jerarchy.find({ employee: employeeId }).populate("employee").populate("superior").populate("department");
     return jerarchies;
@@ -71,6 +77,7 @@ export const jerarchyService = {
     getJerarchiesByEmployee,
     getJerarchiesBySuperior,
     getJerarchiesByDepartment,
+    removeJerarchyByEmployeeAndDepartment,
     isSuperior,
     hasSuperior
 

@@ -145,12 +145,32 @@ async function getjerarchiesByDepartment(req: Request, res: Response, next: Next
     }
 }
 
+async function removeJerarchiesByEmployeeAndDepartment(req: Request, res: Response, next: NextFunction) {
+    try {
+        const { employeeId, departmentId  } = req.params;
+
+        if (!employeeService.getEmployee(employeeId)) {
+            return res.status(404).json({ message: "employee not found" });
+        }
+
+        if (!departmentService.getDepartment(departmentId)) {
+            return res.status(404).json({ message: "department not found" });
+        }
+
+        const jerarchies = await jerarchyService.removeJerarchyByEmployeeAndDepartment(employeeId, departmentId);
+        return res.status(200).json(jerarchies);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const jerarchyController = {
     getjerarchies,
     getjerarchy,
     createjerarchy,
     updatejerarchy,
     removejerarchy,
+    removeJerarchiesByEmployeeAndDepartment,
     getjerarchiesByEmployee,
     getjerarchiesBySuperior,
     getjerarchiesByDepartment

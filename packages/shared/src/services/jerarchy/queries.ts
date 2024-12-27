@@ -35,3 +35,14 @@ export function useJerarchiesByEmployee(employeeId: string) {
     return useQuery({ queryKey: ["getJerarchiesByEmployee", employeeId], queryFn: () => getJerarchiesByEmployee(employeeId) });
   }
 
+async function getJerarchiesByDepartment(departmentId: string) {
+    const response = await api.get(`/jerarchies/department/${departmentId}`);
+    return response;
+  }
+
+export function useJerarchiesByDepartment(departmentId: string) {
+    return useQuery({ queryKey: ["getJerarchiesByDepartment", departmentId], queryFn: () => getJerarchiesByDepartment(departmentId) });
+  }
+
+
+

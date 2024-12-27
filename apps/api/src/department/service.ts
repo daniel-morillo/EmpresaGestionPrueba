@@ -34,27 +34,47 @@ async function updateDepartment(_id: TUpdateDepartmentQueryDefinition["_id"], in
 async function addEmployeeToDepartment(departmentId: string, employeeId: string) {
     const department = await Department.findById(departmentId);
     const employee = await Employee.findById(employeeId);
-    if ((!department) || (!employee)) {
+
+    if (!department || !employee) {
         return null;
     }
-    department.employees.push(employeeId);
+
+    if (!department.employees.includes(employeeId)) {
+        department.employees.push(employeeId);
+    }
+
+    if (!employee.departments.includes(departmentId)) {
+        employee.departments.push(departmentId);
+    }
+
     await department.save();
+    await employee.save();
 
     return department;
 }
 
 async function removeEmployeeFromDepartment(departmentId: string, employeeId: string) {
     const department = await Department.findById(departmentId);
-    const employee = department?.employees.find((id) => id.toString() === employeeId);
+    const employee = await Employee.findById(employeeId);
+
     if (!department || !employee) {
         return null;
     }
-    department.employees = department.employees.filter((id) => id.toString() !== employeeId);
+
+    department.employees = department.employees.filter(
+        (id) => id.toString() !== employeeId
+    );
+
+    employee.departments = employee.departments.filter(
+        (id) => id.toString() !== departmentId
+    );
+
     await department.save();
+    await employee.save();
 
     return department;
-
 }
+
 
 export const departmentService = {
     getDepartments,

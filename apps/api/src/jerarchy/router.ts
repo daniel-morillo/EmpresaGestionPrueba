@@ -9,6 +9,7 @@ JerarchyRouter.get("/:_id", asyncHandler(jerarchyController.getjerarchy));
 JerarchyRouter.post("/", asyncHandler(jerarchyController.createjerarchy));
 JerarchyRouter.put("/:_id", asyncHandler(jerarchyController.updatejerarchy));
 JerarchyRouter.delete("/:_id", asyncHandler(jerarchyController.removejerarchy));
+JerarchyRouter.delete("/employee/:employeeId/department/:departmentId", asyncHandler(jerarchyController.removeJerarchiesByEmployeeAndDepartment));
 JerarchyRouter.get("/employee/:employeeId", asyncHandler(jerarchyController.getjerarchiesByEmployee));
 JerarchyRouter.get("/superior/:superiorId", asyncHandler(jerarchyController.getjerarchiesBySuperior));
 JerarchyRouter.get("/department/:departmentId", asyncHandler(jerarchyController.getjerarchiesByDepartment));

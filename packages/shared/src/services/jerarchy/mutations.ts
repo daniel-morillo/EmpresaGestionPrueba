@@ -54,4 +54,25 @@ export function useRemoveJerarchy(){
     })
 }
 
+export async function removeJerarchyByEmployeeAndDepartment({
+    employeeId,
+    departmentId,
+  }: {
+    employeeId: string;
+    departmentId: string;
+  }) {
+    await api.delete(`/jerarchies/employee/${employeeId}/department/${departmentId}`);
+  }
+  
+  export function useRemoveJerarchyByEmployeeAndDepartment() {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationKey: ["removeJerarchyByEmployeeAndDepartment"],
+      mutationFn: removeJerarchyByEmployeeAndDepartment,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["getJerarchies"] });
+      },
+    });
+  }
+
 
