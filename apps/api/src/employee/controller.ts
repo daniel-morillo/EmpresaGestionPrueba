@@ -68,12 +68,23 @@ async function deleteEmployee(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+async function getEmployeesByDepartment(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { departmentId } = req.params;
+    const employees = await employeeService.getEmployeesByDepartment(departmentId);
+    return res.status(200).json(employees);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export const employeeController = {
   getEmployees,
   getEmployee,
   createEmployee,
   updateEmployee,
   deleteEmployee,
+  getEmployeesByDepartment,
 } as const;
 
 

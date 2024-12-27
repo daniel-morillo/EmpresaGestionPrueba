@@ -26,4 +26,16 @@ export function useEmployee(params: TGetEmployeeParamsDefinition){
     return useQuery({queryKey: ["getEmployee", params], queryFn: () => getEmployee(params._id)})
 }
 
+export async function getEmployeesByDepartment(departmentId: string) {
+    const response = await api.get(`/employees/department/${departmentId}`);
+    const employees = (await response) as PopulatedEmployee[];
+    return employees;
+}
+
+export function useEmployeesByDepartment(departmentId: string) {
+    return useQuery({ queryKey: ["getEmployeesByDepartment", departmentId], queryFn: () => getEmployeesByDepartment(departmentId) });
+}
+
+
+
 

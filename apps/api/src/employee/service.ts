@@ -37,6 +37,11 @@ async function deleteEmployee(_id: TGetEmployeeParamsDefinition["_id"]) {
     return employee;
 }
 
+async function getEmployeesByDepartment(departmentId: string) {
+    const employees = await Employee.find({ departments: departmentId }).populate("departments");
+    return employees;
+}
+
 
 
 export const employeeService = {
@@ -44,5 +49,6 @@ export const employeeService = {
     getEmployee,
     createEmployee,
     updateEmployee,
-    deleteEmployee
+    deleteEmployee,
+    getEmployeesByDepartment
 } as const

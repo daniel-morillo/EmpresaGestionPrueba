@@ -6,6 +6,8 @@ import NewEmployee from './views/AddEmployee';
 import Departments from './views/Departments';
 import AddDepartment from './views/AddDepartment';
 import EditDepartment from './views/EditDepartment';
+import DepartmentDetails from './views/DepartmentDetails';
+import ManageHierarchies from './views/ManageHierarchy';
 
 export const AppRouter = () => {
   return (
@@ -19,6 +21,8 @@ export const AppRouter = () => {
         <Route path="/departments" element={<Departments />} />
         <Route path="/departments/new" element={<AddDepartment />} />
         <Route path="/departments/:id/edit" element={<EditDepartment/>} />
+        <Route path = "/departments/:id" element={<DepartmentDetails />} />
+        <Route path = "/departments/:id/hierarchies" element={<ManageHierarchies />} />
       </Routes>
     
   );

@@ -25,7 +25,8 @@ const EmployeeDetails = () => {
     return <div className="flex justify-center items-center h-screen text-xl">Employee not found</div>;
   }
 
-  // Grouping hierarchies by department
+  
+  
   const departmentsMap = hierarchies?.reduce((acc: any, hierarchy: any) => {
     const departmentId = hierarchy.department._id;
     if (!acc[departmentId]) {
@@ -53,9 +54,10 @@ const EmployeeDetails = () => {
         <div className="mb-6">
           <p className="text-lg font-semibold">Name: <span className="font-light">{employee.name}</span></p>
           <p className="text-lg font-semibold">Email: <span className="font-light">{employee.email}</span></p>
+          <p className='text-lg font-semibold'>Departments: <span className="font-light">{employee.departments.map((dept: any) => dept.name).join(', ')}</span></p>
         </div>
         <div>
-          <h2 className="text-xl font-semibold mb-4">Departments</h2>
+          <h2 className="text-xl font-semibold mb-4">Departments Hierarchies</h2>
           {departments.length ? (
             <div className="space-y-4">
               {departments.map((dept: any) => (
@@ -78,7 +80,7 @@ const EmployeeDetails = () => {
               ))}
             </div>
           ) : (
-            <p className="text-lg font-light">No department information available.</p>
+            <p className="text-lg font-light">No heriarchy information available.</p>
           )}
         </div>
       </div>
