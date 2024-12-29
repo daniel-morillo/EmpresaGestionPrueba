@@ -1,46 +1,34 @@
-# Getting Started with Create React App
+# Instrucciones del Proyecto de Gestión de Empresa
+## Tecnologías Utilizadas:
+Backend:
+ 1. Node.js
+ 2. Javascript
+ 3. Typescript
+ 4. Express
+ 5. Mongoose 
+ 6. MongoDB Database
+Frontend:
+ 7. React
+ 8. Typescript
+ 9. TailwindCSS
+ 10. DaisyUI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview:
+Este es un proyecto realizado bajo la premisa de administración de gestión de empleados y departamentos de una empresa. Para su desarrollo se decidió utilizar una arquitectura MVC (Modelo Vista Controlador)
+### Elementos del MVC:
+1. Packages/Shared: En la carpeta models se encuentran los modelos de datos declarados utilizando mongoose y typescript. En la carpeta de services se encuentran hooks personalizados los cuales son usados en el cliente para que el mismo no interactúe directamente con el Backend
 
-## Available Scripts
+2. Api: dispone de una carpeta por cada modelo de dato empleado, en esa carpeta se encuentran los servicios, controladores y routers de cada modelo dentro de la api. También una carpeta middleware con un asynHandler para manejar las asincronías de las peticiones a la api. Finalmente el archivo router.ts es donde están todas las rutas y server.ts es el archivo principal de la api.
 
-In the project directory, you can run:
+3. Client: toda la lógica que interactua con el cliente, es decir, las vistas en sí, hay una carpeta components para componentes recurrentes en el diseño y una carpeta de vistas donde se encuentran todas las páginas que son manejadas gracias a React Router.
 
-### `npm start`
+## Instrucciones para correr el proyecto
+1. Clonar el repositorio de github
+2. Ejecutar el comando npm install para instalar todas las dependencias del proyecto
+3. Crear un archivo .env en la ruta base de app/api con las siguientes variables: MONGO_URI, PORT
+4. Asignar la Uri de MongoDB compartida a la variable de entorno y establecer el puerto de tu preferencia para la API (por default está en el 3000)
+5. Comandos de Ejecución:
+   5.1: npm run start --> Ejecuta tanto frontend como backend concurrentemente
+   5.2: npm run start:api --> Ejecuta solo backend
+   5.3: npm run start:client --> Ejecuta solo frontend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
