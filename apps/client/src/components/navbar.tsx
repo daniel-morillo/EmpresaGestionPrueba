@@ -54,9 +54,6 @@ export function Header() {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className="absolute top-16 left-0 w-full bg-base-100 shadow-lg">
-                    <a onClick={() => handleNavigation('/')} className="block px-4 py-2 text-lg hover:bg-base-200">
-                        Home
-                    </a>
                     <a onClick={() => handleNavigation('/departments')} className="block px-4 py-2 text-lg hover:bg-base-200">
                         Departments
                     </a>

@@ -26,6 +26,7 @@ const DepartmentDetails = () => {
     return <div className="flex justify-center items-center h-screen text-xl">Department not found</div>;
   }
 
+  //We create a map to group the hierarchies by superior
   const hierarchiesMap = hierarchies?.reduce((acc: any, hierarchy: any) => {
     const superiorId = hierarchy.superior?._id || "no-superior";
     if (!acc[superiorId]) {
@@ -40,6 +41,7 @@ const DepartmentDetails = () => {
     return acc;
   }, {});
 
+  //This is to show the hierarchies in a more readable way
   const groups = Object.values(hierarchiesMap);
 
   return (

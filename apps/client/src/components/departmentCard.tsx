@@ -14,6 +14,7 @@ interface DepartmentCardProps {
     onView,
     onEdit,
   }: DepartmentCardProps) {
+    //This is for not having too much larger size cards
     const visibleEmployees = employees.slice(0, 4);
     const hasMoreEmployees = employees.length > 4;
   
@@ -35,6 +36,7 @@ interface DepartmentCardProps {
               </li>
             ))}
             {hasMoreEmployees && (
+        
               <li className="text-white text-sm italic">more employees...</li>
             )}
           </ul>

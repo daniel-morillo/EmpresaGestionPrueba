@@ -2,6 +2,7 @@ import {z} from "zod";
 import { baseModelDefinition } from "../definitions";
 import { isValidObjectId, Types } from "mongoose";
 
+//Define the jerarchy using our model definition, adding an employee, superior, both referencing to the employee model, and a department referencing to the department model
 export const jerarchyDefinition = baseModelDefinition.extend({
     employee: z.instanceof(
         Types.ObjectId)

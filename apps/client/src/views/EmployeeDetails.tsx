@@ -26,7 +26,7 @@ const EmployeeDetails = () => {
   }
 
   
-  
+  //using reduce to group hierarchies by department
   const departmentsMap = hierarchies?.reduce((acc: any, hierarchy: any) => {
     const departmentId = hierarchy.department._id;
     if (!acc[departmentId]) {

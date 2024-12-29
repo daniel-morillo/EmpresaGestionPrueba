@@ -19,6 +19,7 @@ const CreateEmployee = () => {
 
   const handleDepartmentChange = (index: number, value: string) => {
     if (departments.includes(value) && departments[index] !== value) {
+      //checks if the department is already selected
       alert("This department is already selected!");
       return;
     }

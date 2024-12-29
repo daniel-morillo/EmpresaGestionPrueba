@@ -54,6 +54,7 @@ const Departments = () => {
               key={department._id.toString()}
               name={department.name}
               description={department.description}
+              //Here an error is displayed because the editor does not recognize the department as a populated model, it does not affect the functionality of the application
               employees={department.employees.map((emp) => emp.name)}
               onView={() => navigate(`/departments/${department._id}`)}
               onEdit={() => navigate(`/departments/${department._id}/edit`)}

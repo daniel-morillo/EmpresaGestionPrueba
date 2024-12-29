@@ -42,26 +42,31 @@ async function removeJerarchyByEmployeeAndDepartment(EmployeeId: string, Departm
 }
 
 async function getJerarchiesByEmployee(employeeId: string) {
+    //Get all the hierarchies where the employee is the given employee
     const jerarchies = await Jerarchy.find({ employee: employeeId }).populate("employee").populate("superior").populate("department");
     return jerarchies;
 }
 
 async function getJerarchiesBySuperior(superiorId: string) {
+    //Get all the hierarchies where the superior is the given employee
     const jerarchies = await Jerarchy.find({ superior: superiorId }).populate("employee").populate("superior").populate("department");
     return jerarchies;
 }
 
 async function getJerarchiesByDepartment(departmentId: string) {
+    //Get all the hierarchies where the department is the given department
     const jerarchies = await Jerarchy.find({ department: departmentId }).populate("employee").populate("superior");
     return jerarchies;
 }
 
 async function isSuperior(employeeId: string, superiorId: string, departmentId: string) {
+    //Checks if a given employee is a superior of the given employee in the given department
     const jerarchies = await Jerarchy.find({ employee: employeeId, superior: superiorId, department: departmentId });
     return jerarchies.length > 0;
 }
 
 async function hasSuperior(employeeId: string, departmentId: string) {
+    //Checks if a given employee has a superior in the given department
     const jerarchies = await Jerarchy.find({ employee: employeeId, department: departmentId });
     return jerarchies.length > 0;
 }

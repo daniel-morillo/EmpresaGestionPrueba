@@ -33,6 +33,8 @@ const EditEmployee = () => {
       setName(employee.name);
       setEmail(employee.email);
 
+
+      // Map the department ids to strings for easier comparison
       const selectedDepartments = employee.departments
         .map((dept: any) => 
           availableDepartments.find((d) => d._id.toString() === dept._id.toString())?._id.toString()

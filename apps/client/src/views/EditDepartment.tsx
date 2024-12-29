@@ -37,6 +37,7 @@ const EditDepartment = () => {
 
   const handleEmployeeAdd = (employeeId: string) => {
     if (selectedEmployees.includes(employeeId)) {
+      //Checks if the employee is already added
       alert("This employee is already added!");
       return;
     }
@@ -45,6 +46,7 @@ const EditDepartment = () => {
 
   const handleEmployeeRemove = (employeeId: string) => {
     const confirmRemove = window.confirm(
+      //We have to handle the confirmation of the user to remove the employee
       "Are you sure you want to remove this employee? All related hierarchies will also be deleted."
     );
     if (!confirmRemove) return;
@@ -69,6 +71,7 @@ const EditDepartment = () => {
       },
       {
         onSuccess: () => {
+          //adds or remove the employees as being selected
           addedEmployees.forEach((empId) => addEmployeeToDepartment({ _id: id!, employeeId: empId }));
           removedEmployees?.forEach((empId) => {
             removeEmployeeFromDepartment({ _id: id!, employeeId: empId });

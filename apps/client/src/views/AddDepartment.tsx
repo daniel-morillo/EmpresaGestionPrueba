@@ -14,6 +14,8 @@ const CreateDepartment = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleAddEmployee = (employeeId: string) => {
+
+    // Check if the employee is already added
     if (selectedEmployees.includes(employeeId)) {
       alert("This employee is already added!");
       return;
@@ -21,12 +23,15 @@ const CreateDepartment = () => {
     setSelectedEmployees([...selectedEmployees, employeeId]);
   };
 
+
   const handleRemoveEmployee = (employeeId: string) => {
+    // Check if the employee is not in the list, if so remove it
     setSelectedEmployees(selectedEmployees.filter((id) => id !== employeeId));
   };
 
   const handleCreate = () => {
     if (!name || !description) {
+      //check if all the required fields are filled
       alert("Please fill out all fields.");
       return;
     }

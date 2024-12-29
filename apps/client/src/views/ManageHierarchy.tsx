@@ -43,7 +43,7 @@ const ManageHierarchies = () => {
       alert("Superior and subordinate cannot be the same.");
       return;
     }
-
+    //checks if the hierarchy is going to have a circular dependency, if so, it will not be created
     const hasCircularDependency = hierarchies?.some((hierarchy: any) => {
       return (
         (hierarchy.superior?._id === subordinateId && hierarchy.employee?._id === superiorId) ||
@@ -56,6 +56,7 @@ const ManageHierarchies = () => {
       return;
     }
 
+    //checks if the subordinate already has a superior, if so, it will not be created
     const alreadyHasSuperior = hierarchies?.some((hierarchy: any) => {
       return hierarchy.employee?._id === subordinateId && hierarchy.superior;
     });

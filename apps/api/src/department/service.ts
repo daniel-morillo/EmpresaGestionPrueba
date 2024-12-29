@@ -32,18 +32,22 @@ async function updateDepartment(_id: TUpdateDepartmentQueryDefinition["_id"], in
 }
 
 async function addEmployeeToDepartment(departmentId: string, employeeId: string) {
+    // Adds a given employee to a given department
     const department = await Department.findById(departmentId);
     const employee = await Employee.findById(employeeId);
 
     if (!department || !employee) {
+        // If the department or employee does not exist, return null
         return null;
     }
 
     if (!department.employees.includes(employeeId)) {
+        // If the employee is not already in the department, add them
         department.employees.push(employeeId);
     }
 
     if (!employee.departments.includes(departmentId)) {
+        // If the department is not already in the employee's departments, add it
         employee.departments.push(departmentId);
     }
 
@@ -54,13 +58,16 @@ async function addEmployeeToDepartment(departmentId: string, employeeId: string)
 }
 
 async function removeEmployeeFromDepartment(departmentId: string, employeeId: string) {
+    // Removes a given employee from a given department
     const department = await Department.findById(departmentId);
     const employee = await Employee.findById(employeeId);
 
     if (!department || !employee) {
+        // If the department or employee does not exist, return nothing
         return null;
     }
 
+    // Remove the employee from the department and the department from the employee
     department.employees = department.employees.filter(
         (id) => id.toString() !== employeeId
     );

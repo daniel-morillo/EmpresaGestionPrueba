@@ -2,6 +2,7 @@ import {z} from "zod";
 import { baseModelDefinition } from "../definitions";
 import { Types, isValidObjectId } from "mongoose";
 
+//Define the department using our model definition, adding a name, description and employees that reference the employee model
 export const departmentDefinition = baseModelDefinition.extend({
     name: z.string().nonempty("Department Name must not be empty"),
     description: z.string().nonempty("Department Description must not be empty"),

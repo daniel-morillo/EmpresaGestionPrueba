@@ -26,9 +26,11 @@ Este es un proyecto realizado bajo la premisa de administración de gestión de 
 1. Clonar el repositorio de github
 2. Ejecutar el comando npm install para instalar todas las dependencias del proyecto
 3. Crear un archivo .env en la ruta base de app/api con las siguientes variables: MONGO_URI, PORT
-4. Asignar la Uri de MongoDB compartida a la variable de entorno y establecer el puerto de tu preferencia para la API (por default está en el 3000)
+4. Asignar la Uri de MongoDB compartida a la variable de entorno y establecer el puerto de tu preferencia para la API (por default está en el 5000)
 5. Comandos de Ejecución:
    5.1: npm run start --> Ejecuta tanto frontend como backend concurrentemente
    5.2: npm run start:api --> Ejecuta solo backend
    5.3: npm run start:client --> Ejecuta solo frontend
+
+6. Si quieres que el frontend esté corriendo en un puerto diferente a http://localhost:5173/ puedes cmabiarlo en vite.config.ts, también habría que agregar el nuevo puerto en app.use(cors({ origin:  'http://localhost:5173'})) en el archivo server.ts
 
